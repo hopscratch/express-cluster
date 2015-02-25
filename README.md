@@ -11,6 +11,9 @@ This works with any EventListener that emits the `"close"` event and has a
 By default the module will spawn ''n'' processes where ''n'' is the number of
 cores you have. You should configure this parameter for your environment.
 
+If you wish to do something in the master once all workers are online, provide
+a function to `onlineListener`.
+
 ## Synopsis
 
     var express = require('express');
@@ -29,11 +32,14 @@ cores you have. You should configure this parameter for your environment.
     {
         count: 5,       // number of workers to spawn: defaults to CPU core count
         respawn: true,  // respawn process on exit: defaults to true
-        verbose: false  // log what happens to console: defaults to false
+        verbose: false, // log what happens to console: defaults to false
 
         // Attach the given function to each spawned worker. The function will
         // be bound to the worker that sent the message so you can setup a two
         // way message bus if you please. See examples/messaging.js for an
         // example.
-        workerListener: function(){}
+        workerListener: function(){},
+
+        // Called once all children are online
+        onlineListener: function(workers) {}
     }
