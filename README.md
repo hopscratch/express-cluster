@@ -41,5 +41,9 @@ a function to `onlineListener`.
         workerListener: function(){},
 
         // Called once all children are online
-        onlineListener: function(workers) {}
+        onlineListener: function(workers) {},
+
+        // The event to listen for to determine if workers online. By default,
+        // will listen for the "online" event.
+        onlineEvent: 'online'
     }
